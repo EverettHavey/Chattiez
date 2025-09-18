@@ -66,9 +66,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Helper function to get a random response from an array
     function getRandomResponse(responses) {
-        if (!responses || responses.length === 0) {
-            return "I'm not sure how to respond to that.";
-        }
         const randomIndex = Math.floor(Math.random() * responses.length);
         return responses[randomIndex];
     }

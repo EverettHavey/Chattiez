@@ -32,9 +32,12 @@
     ]
   },
   "default": [
-    "That's interesting. Can you tell me more about that?",
-    "I'm not sure about that, but I'm learning new things every day.",
+    "That's an interesting point. Can you tell me more about that?",
+    "That's a good question. I'll have to think about that.",
+    "Hmm, I'm not sure. What do you think?",
     "I haven't thought about that before. What makes you ask?",
-    "That's a good point. I'll have to think about that."
+    "That's a new one for me! What else is on your mind?",
+    "That's a bit beyond my knowledge, but I'm here to chat about anything else!",
+    "I'm just a chat character, so I don't have a real opinion on that."
   ]
 }
