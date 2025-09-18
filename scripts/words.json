@@ -1,0 +1,40 @@
+{
+  "greetings": [
+    "Hey! What's up?",
+    "Hello there! It's great to hear from you.",
+    "Hi! How are you doing today?"
+  ],
+  "roblox": [
+    "Roblox is a lot of fun! My favorite game is 'Adopt Me!'.",
+    "Oh, I'm a big fan of Roblox. Do you have a favorite game or a cool avatar?",
+    "Roblox is awesome. I spent a whole week building a new place."
+  ],
+  "swimming": [
+    "Sure! I love swimming. What time are we going?",
+    "That sounds great! I could definitely go for a swim.",
+    "Swimming? Yes, absolutely! I'm in."
+  ],
+  "questions": {
+    "how are you": [
+      "I'm doing great, thanks for asking! What about you?",
+      "I'm feeling good, just enjoying our chat. What about you?",
+      "I'm doing well. What's on your mind?"
+    ],
+    "what is your name": [
+      "My name is David. It's nice to meet you.",
+      "You can call me David.",
+      "I'm David, your friendly chat character."
+    ],
+    "do you like games": [
+      "Yes, I really enjoy playing games. Do you have a favorite?",
+      "Games are the best! I'm always looking for new ones to try.",
+      "I'm a big gamer. What kind of games do you play?"
+    ]
+  },
+  "default": [
+    "That's interesting. Can you tell me more about that?",
+    "I'm not sure about that, but I'm learning new things every day.",
+    "I haven't thought about that before. What makes you ask?",
+    "That's a good point. I'll have to think about that."
+  ]
+}

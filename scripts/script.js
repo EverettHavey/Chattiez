@@ -2,6 +2,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const chatBox = document.getElementById("chat-box");
     const messageInput = document.getElementById("message-input");
     const sendButton = document.getElementById("send-button");
+    let chatData = {};
+
+    // Load the JSON data
+    fetch('words.json')
+        .then(response => response.json())
+        .then(data => {
+            chatData = data;
+            console.log("Chat data loaded:", chatData); // For debugging
+        })
+        .catch(error => console.error("Error loading chat data:", error));
 
     sendButton.addEventListener("click", sendMessage);
     messageInput.addEventListener("keypress", function(event) {
@@ -15,58 +25,51 @@ document.addEventListener("DOMContentLoaded", function() {
         if (userMessage === "") return;
 
         // Add user message to the chat
-        const userBubble = document.createElement("div");
-        userBubble.classList.add("chat-bubble", "user-bubble");
-        userBubble.textContent = userMessage;
-        chatBox.appendChild(userBubble);
-
-        // Clear the input field
+        addMessage(userMessage, "user-bubble");
         messageInput.value = "";
         
-        // Scroll to the bottom of the chat box
-        chatBox.scrollTop = chatBox.scrollHeight;
-
-        // Simulate David's response
+        // Get David's response and add it
         setTimeout(() => {
-            const davidBubble = document.createElement("div");
-            davidBubble.classList.add("chat-bubble", "david-bubble");
-            davidBubble.textContent = getDavidResponse(userMessage);
-            chatBox.appendChild(davidBubble);
-            
-            // Scroll to the bottom again
-            chatBox.scrollTop = chatBox.scrollHeight;
+            const davidResponse = getDavidResponse(userMessage);
+            addMessage(davidResponse, "david-bubble");
         }, 1000);
+    }
+
+    function addMessage(text, bubbleClass) {
+        const bubble = document.createElement("div");
+        bubble.classList.add("chat-bubble", bubbleClass);
+        bubble.textContent = text;
+        chatBox.appendChild(bubble);
+        chatBox.scrollTop = chatBox.scrollHeight;
     }
 
     function getDavidResponse(userMessage) {
         const lowerCaseMessage = userMessage.toLowerCase();
-
-        // Specific responses
-        if (lowerCaseMessage.includes("go swimming")) {
-            return "Sure! I'd love to go swimming. What time works for you?";
-        }
         
-        // Yes/No questions and other common phrases
-        if (lowerCaseMessage.includes("how are you")) {
-            return "I'm doing great, thanks for asking! What about you?";
+        // Check for specific keywords and return a random response from the JSON file
+        if (lowerCaseMessage.includes("roblox")) {
+            return getRandomResponse(chatData.roblox);
+        } else if (lowerCaseMessage.includes("swimming")) {
+            return getRandomResponse(chatData.swimming);
+        } else if (lowerCaseMessage.includes("how are you")) {
+            return getRandomResponse(chatData.questions["how are you"]);
+        } else if (lowerCaseMessage.includes("what is your name")) {
+            return getRandomResponse(chatData.questions["what is your name"]);
         } else if (lowerCaseMessage.includes("do you like games")) {
-            return "Yes, I really enjoy playing games. Do you have a favorite?";
-        } else if (lowerCaseMessage.includes("can you help me")) {
-            return "I will certainly try. What do you need help with?";
-        } else if (lowerCaseMessage.includes("are you a robot")) {
-            return "No, I'm a chat character here to talk with you. Do you think I sound like one?";
-        } else if (lowerCaseMessage.includes("is it raining")) {
-            return "I can't check the weather, but I can talk to you about anything else!";
-        } else if (lowerCaseMessage.includes("what is your favorite color")) {
-            return "I like the color blue. Do you have a favorite color?";
+            return getRandomResponse(chatData.questions["do you like games"]);
         } else if (lowerCaseMessage.includes("hello") || lowerCaseMessage.includes("hi")) {
-            return "Hey there! It's great to hear from you.";
-        } else if (lowerCaseMessage.includes("your name")) {
-            return "My name is David. What's yours?";
-        } else if (lowerCaseMessage.includes("bye") || lowerCaseMessage.includes("goodbye")) {
-            return "It was great chatting with you! Talk to you later!";
+            return getRandomResponse(chatData.greetings);
         } else {
-            return "That's an interesting point. Can you tell me more about it?";
+            return getRandomResponse(chatData.default);
         }
+    }
+
+    // Helper function to get a random response from an array
+    function getRandomResponse(responses) {
+        if (!responses || responses.length === 0) {
+            return "I'm not sure how to respond to that.";
+        }
+        const randomIndex = Math.floor(Math.random() * responses.length);
+        return responses[randomIndex];
     }
 });
